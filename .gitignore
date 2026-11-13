@@ -1,0 +1,12 @@
+# Live database credentials — copy db.example.php to db.php and fill in
+db.php
+
+# Database dumps (contain student records)
+*.sql
+
+# Student photos
+assets/img/students/*
+!assets/img/students/.gitkeep
+
+# Contains a sample MySQL password and server details — kept local
+LINUX_MIGRATION_GUIDE.md

@@ -1,0 +1,1547 @@
+/* OSU One Card - Theme System
+   Oromia State University brand: every colour below comes from the
+   Typography & Colour guide (or is a transparent tint of one). */
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+Ethiopic:wght@400;500;600&family=Work+Sans:wght@400;500;600&family=Young+Serif&display=swap');
+
+/* Erstoria is the headline face. It is used when installed on the device;
+   to self-host it, add a url('../fonts/Erstoria.woff2') source here.
+   Young Serif is the documented fallback. */
+@font-face {
+    font-family: 'Erstoria';
+    src: local('Erstoria'), local('Erstoria Regular'), local('Erstoria-Regular');
+    font-display: swap;
+}
+
+:root {
+    /* Brand palette - primary */
+    --osu-evergreen: #144130;
+    --osu-olive: #A79241;
+    --osu-ivory: #F7F3E9;
+    --osu-ink: #0C211A;
+    /* Brand palette - secondary */
+    --osu-forest: #1B4D3E;
+    --osu-muted-olive: #B8A56E;
+    --osu-parchment: #EDE6D6;
+    --osu-clay: #6B4E3D;
+    --osu-sage: #A8B5A0;
+    --osu-highland: #3A6B5A;
+
+    --font-heading: 'Erstoria', 'Young Serif', 'Noto Sans Ethiopic', Georgia, serif;
+    --font-body: 'Work Sans', 'Noto Sans Ethiopic', sans-serif;
+
+    /* Accent / text colours (readable on the current surface) */
+    --primary-color: var(--osu-evergreen);
+    --primary: var(--osu-evergreen);
+    --primary-light: var(--osu-muted-olive);
+    --secondary-color: var(--osu-highland);
+    --success-color: var(--osu-forest);
+    --danger-color: var(--osu-clay);
+    --warning-color: var(--osu-olive);
+    --info-color: var(--osu-highland);
+    --text-color: var(--osu-ink);
+
+    /* Fills (always carry light text, except warning which carries Ink) */
+    --primary-fill: var(--osu-evergreen);
+    --primary-fill-hover: var(--osu-forest);
+    --success-fill: var(--osu-forest);
+    --danger-fill: var(--osu-clay);
+    --warning-fill: var(--osu-olive);
+    --neutral-fill: var(--osu-highland);
+    --on-fill: var(--osu-ivory);
+
+    /* Status panels: background + text pairs */
+    --success-bg: var(--osu-sage);
+    --success-on: var(--osu-ink);
+    --danger-bg: var(--osu-clay);
+    --danger-on: var(--osu-ivory);
+    --warning-bg: var(--osu-muted-olive);
+    --warning-on: var(--osu-ink);
+    --neutral-bg: rgba(20, 65, 48, 0.1);
+    --neutral-on: var(--osu-ink);
+
+    /* Soft tints behind icons */
+    --primary-tint: rgba(20, 65, 48, 0.1);
+    --success-tint: rgba(27, 77, 62, 0.12);
+    --danger-tint: rgba(107, 78, 61, 0.14);
+    --warning-tint: rgba(167, 146, 65, 0.18);
+    --neutral-tint: rgba(58, 107, 90, 0.12);
+
+    /* Surfaces */
+    --light-bg: #FFFFFF;
+    --dark-bg: var(--osu-ink);
+    --light-text: var(--osu-ink);
+    --dark-text: var(--osu-ivory);
+    --border-color: rgba(20, 65, 48, 0.16);
+    --table-head-bg: var(--osu-ivory);
+    --dark-border-color: rgba(247, 243, 233, 0.16);
+    --card-bg: #FFFFFF;
+    --card-bg-light: #FFFFFF;
+    --card-bg-dark: var(--osu-evergreen);
+    --hover-bg-light: rgba(20, 65, 48, 0.07);
+    --hover-bg-dark: rgba(247, 243, 233, 0.07);
+    --sidebar-bg-light: var(--osu-ivory);
+    --sidebar-bg-dark: var(--osu-evergreen);
+    --navbar-bg-light: #FFFFFF;
+    --navbar-bg-dark: var(--osu-evergreen);
+    --avatar-bg: var(--osu-sage);
+}
+
+/* Dark mode re-points the shared tokens, so inline styles that use them adapt too */
+body.dark-mode {
+    --primary-color: var(--osu-muted-olive);
+    --primary: var(--osu-muted-olive);
+    --secondary-color: var(--osu-sage);
+    --success-color: var(--osu-sage);
+    --danger-color: var(--osu-parchment);
+    --warning-color: var(--osu-muted-olive);
+    --info-color: var(--osu-sage);
+    --text-color: var(--osu-ivory);
+    --primary-fill: var(--osu-highland);
+    --primary-fill-hover: var(--osu-forest);
+    --success-fill: var(--osu-highland);
+    --neutral-fill: var(--osu-highland);
+    --success-bg: var(--osu-highland);
+    --success-on: var(--osu-ivory);
+    --neutral-bg: rgba(247, 243, 233, 0.12);
+    --neutral-on: var(--osu-ivory);
+    --primary-tint: rgba(247, 243, 233, 0.1);
+    --success-tint: rgba(247, 243, 233, 0.1);
+    --danger-tint: rgba(247, 243, 233, 0.1);
+    --warning-tint: rgba(247, 243, 233, 0.1);
+    --neutral-tint: rgba(247, 243, 233, 0.1);
+    --border-color: rgba(247, 243, 233, 0.16);
+    --card-bg: var(--osu-evergreen);
+    --table-head-bg: rgba(247, 243, 233, 0.08);
+    --hover-bg-light: rgba(247, 243, 233, 0.07);
+    --avatar-bg: var(--osu-highland);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: var(--font-body);
+    background-color: var(--light-bg);
+    color: var(--light-text);
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+body.dark-mode {
+    background-color: var(--dark-bg);
+    color: var(--dark-text);
+}
+
+/* Login Page Styles */
+.login-wrapper {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--light-bg);
+    padding: 20px;
+}
+
+body.dark-mode .login-wrapper {
+    background: var(--dark-bg);
+}
+
+.login-container {
+    width: 100%;
+    max-width: 480px;
+    background: var(--card-bg-light);
+    border-radius: 12px;
+    box-shadow: 0 10px 40px rgba(12, 33, 26, 0.1);
+    padding: 60px 40px;
+    text-align: center;
+}
+
+body.dark-mode .login-container {
+    background: var(--card-bg-dark);
+    box-shadow: 0 10px 40px rgba(12, 33, 26, 0.5);
+}
+
+.login-logo {
+    width: 80px;
+    height: 80px;
+    background: transparent;
+    border-radius: 50%;
+    margin: 0 auto 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 48px;
+}
+
+body.dark-mode .login-logo {
+    background: transparent;
+}
+
+.login-title {
+    font-size: 32px;
+    font-weight: 700;
+    color: var(--light-text);
+    margin: 20px 0 10px;
+}
+
+body.dark-mode .login-title {
+    color: var(--dark-text);
+}
+
+.login-subtitle {
+    font-size: 14px;
+    color: var(--secondary-color);
+    margin-bottom: 30px;
+}
+
+.login-heading {
+    font-size: 24px;
+    font-weight: 600;
+    margin: 30px 0 10px;
+    color: var(--light-text);
+}
+
+body.dark-mode .login-heading {
+    color: var(--dark-text);
+}
+
+.login-description {
+    font-size: 13px;
+    color: var(--secondary-color);
+    margin-bottom: 30px;
+}
+
+.form-group {
+    margin-bottom: 20px;
+    text-align: left;
+}
+
+.form-group label {
+    display: block;
+    font-size: 13px;
+    font-weight: 600;
+    margin-bottom: 8px;
+    color: var(--light-text);
+}
+
+body.dark-mode .form-group label {
+    color: var(--dark-text);
+}
+
+.form-group input {
+    width: 100%;
+    padding: 12px 15px;
+    border: 1px solid var(--border-color);
+    border-radius: 6px;
+    font-size: 14px;
+    background-color: var(--light-bg);
+    color: var(--light-text);
+    transition: border-color 0.3s ease;
+}
+
+body.dark-mode .form-group input {
+    background-color: rgba(247, 243, 233, 0.06);
+    border-color: var(--dark-border-color);
+    color: var(--dark-text);
+}
+
+.form-group input:focus {
+    outline: none;
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 3px var(--primary-tint);
+}
+
+.form-group .password-toggle {
+    position: relative;
+}
+
+.password-toggle-btn {
+    position: absolute;
+    right: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: var(--secondary-color);
+    font-size: 16px;
+}
+
+.login-button {
+    width: 100%;
+    padding: 12px;
+    background-color: var(--primary-fill);
+    color: var(--on-fill);
+    border: none;
+    border-radius: 6px;
+    font-size: 15px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    margin-top: 10px;
+}
+
+.login-button:hover {
+    background-color: var(--primary-fill-hover);
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(12, 33, 26, 0.25);
+}
+
+.login-button:active {
+    transform: translateY(0);
+}
+
+.login-footer {
+    font-size: 12px;
+    color: var(--secondary-color);
+    margin-top: 40px;
+}
+
+.alert {
+    padding: 12px 15px;
+    border-radius: 6px;
+    margin-bottom: 20px;
+    font-size: 14px;
+}
+
+.alert-danger {
+    background-color: var(--danger-bg);
+    color: var(--danger-on);
+    border: 1px solid var(--danger-bg);
+}
+
+body.dark-mode .alert-danger {
+    background-color: var(--danger-bg);
+    color: var(--danger-on);
+    border-color: var(--osu-muted-olive);
+}
+
+/* Sidebar Navigation */
+.sidebar {
+    width: 280px;
+    background: var(--sidebar-bg-light);
+    border-right: 1px solid var(--border-color);
+    height: 100vh;
+    position: fixed;
+    left: 0;
+    top: 0;
+    display: flex;
+    flex-direction: column;
+    transition: width 0.3s ease, background-color 0.3s ease, transform 0.3s ease;
+    z-index: 1000;
+}
+
+.sidebar.collapsed {
+    width: 80px;
+}
+
+.sidebar.collapsed .sidebar-brand-text,
+.sidebar.collapsed .sidebar-menu-link span,
+.sidebar.collapsed .sidebar-footer-details {
+    display: none;
+}
+
+.sidebar.collapsed .sidebar-brand {
+    justify-content: center;
+    padding: 20px 10px;
+}
+
+.sidebar.collapsed .sidebar-menu-link {
+    justify-content: center;
+    padding: 15px;
+}
+
+.sidebar.collapsed .sidebar-menu-link i {
+    margin: 0;
+    font-size: 1.2rem;
+}
+
+.sidebar.collapsed .sidebar-footer {
+    padding: 10px;
+}
+
+.sidebar.collapsed .btn-logout span {
+    display: none;
+}
+
+.sidebar.collapsed .btn-logout {
+    justify-content: center;
+    padding: 10px;
+}
+
+body.dark-mode .sidebar {
+    background: var(--sidebar-bg-dark);
+    border-right-color: var(--dark-border-color);
+}
+
+.sidebar-brand {
+    padding: 20px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-weight: 700;
+    color: var(--light-text);
+    /* margin-bottom: 30px; Remove large margin, use padding */
+    flex-shrink: 0;
+}
+
+.sidebar-brand-text {
+    white-space: nowrap;
+    overflow: hidden;
+}
+
+body.dark-mode .sidebar-brand {
+    color: var(--dark-text);
+}
+
+.sidebar-brand-icon {
+    width: 40px;
+    height: 40px;
+    background: var(--primary-light);
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--on-fill);
+    font-weight: bold;
+    flex-shrink: 0;
+}
+
+.sidebar-menu {
+    list-style: none;
+    flex: 1;
+    overflow-y: auto;
+    overflow-x: hidden;
+    padding-bottom: 20px;
+}
+
+.sidebar-menu-item {
+    padding: 0;
+}
+
+.sidebar-menu-link {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 12px 20px;
+    color: var(--secondary-color);
+    text-decoration: none;
+    transition: all 0.3s ease;
+    white-space: nowrap;
+}
+
+.sidebar-menu-link:hover {
+    background-color: var(--hover-bg-light);
+    color: var(--primary-color);
+}
+
+body.dark-mode .sidebar-menu-link:hover {
+    background-color: var(--hover-bg-dark);
+}
+
+.sidebar-menu-link.active {
+    background-color: var(--primary-tint);
+    color: var(--primary-color);
+    border-left: 4px solid var(--primary-color);
+    padding-left: 16px;
+}
+
+.sidebar-menu-link i {
+    width: 20px;
+    text-align: center;
+    flex-shrink: 0;
+}
+
+.sidebar-footer {
+    padding: 20px;
+    background: var(--sidebar-bg-light);
+    border-top: 1px solid var(--border-color);
+    flex-shrink: 0;
+}
+
+body.dark-mode .sidebar-footer {
+    background: var(--sidebar-bg-dark);
+    border-top-color: var(--dark-border-color);
+}
+
+/* Sidebar Toggle Button (Desktop) */
+.sidebar-toggle-btn {
+    position: fixed;
+    left: 268px;
+    top: 30px;
+    width: 24px;
+    height: 24px;
+    background: var(--primary-fill);
+    color: var(--on-fill);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    border: 2px solid var(--card-bg-light);
+    z-index: 1100;
+    box-shadow: 0 2px 5px rgba(12, 33, 26, 0.1);
+    transition: left 0.3s ease;
+}
+
+body.dark-mode .sidebar-toggle-btn {
+    border-color: var(--dark-bg);
+}
+
+/* Main Content Adjustment for Collapsed Sidebar */
+.main-content {
+    margin-left: 280px;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    transition: margin-left 0.3s ease;
+}
+
+.main-content.expanded {
+    margin-left: 80px;
+}
+
+/* Language Switcher */
+.lang-btn {
+    background: transparent;
+    border: 1px solid var(--border-color);
+    color: var(--secondary-color);
+    padding: 5px 10px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 12px;
+    margin-left: 5px;
+    text-decoration: none;
+    transition: all 0.3s ease;
+}
+
+.lang-btn:hover {
+    border-color: var(--primary-color);
+    color: var(--primary-color);
+}
+
+.lang-btn.active {
+    background: var(--primary-fill);
+    color: var(--on-fill);
+    border-color: var(--primary-color);
+    font-weight: bold;
+}
+
+body.dark-mode .lang-btn {
+    border-color: var(--dark-border-color);
+    color: var(--secondary-color);
+}
+
+body.dark-mode .lang-btn:hover {
+    color: var(--primary-light);
+    border-color: var(--primary-light);
+}
+
+body.dark-mode .lang-btn.active {
+    background: var(--primary-light);
+    color: var(--dark-bg);
+    border-color: var(--primary-light);
+}
+
+/* Navbar */
+.navbar-top {
+    background: var(--navbar-bg-light);
+    border-bottom: 1px solid var(--border-color);
+    padding: 15px 30px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: all 0.3s ease;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+
+body.dark-mode .navbar-top {
+    background: var(--navbar-bg-dark);
+    border-bottom-color: var(--dark-border-color);
+}
+
+.navbar-title {
+    font-size: 18px;
+    font-weight: 600;
+    color: var(--light-text);
+}
+
+body.dark-mode .navbar-title {
+    color: var(--dark-text);
+}
+
+.navbar-actions {
+    display: flex;
+    gap: 20px;
+    align-items: center;
+}
+
+.theme-toggle {
+    background: none;
+    border: none;
+    font-size: 20px;
+    cursor: pointer;
+    color: var(--secondary-color);
+    transition: color 0.3s ease;
+}
+
+.theme-toggle:hover {
+    color: var(--primary-color);
+}
+
+/* Page Content */
+.page-content {
+    flex: 1;
+    padding: 30px;
+}
+
+/* Cards */
+.card {
+    background: var(--card-bg-light);
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    padding: 20px;
+    margin-bottom: 20px;
+    transition: all 0.3s ease;
+}
+
+body.dark-mode .card {
+    background: var(--card-bg-dark);
+    border-color: var(--dark-border-color);
+}
+
+.card:hover {
+    box-shadow: 0 4px 12px rgba(12, 33, 26, 0.1);
+}
+
+body.dark-mode .card:hover {
+    box-shadow: 0 4px 12px rgba(12, 33, 26, 0.3);
+}
+
+.card-header {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--secondary-color);
+    margin-bottom: 15px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.card-title {
+    font-size: 20px;
+    font-weight: 700;
+    color: var(--light-text);
+    margin: 15px 0;
+}
+
+body.dark-mode .card-title {
+    color: var(--dark-text);
+}
+
+.card-stat {
+    font-size: 32px;
+    font-weight: 700;
+    color: var(--primary-color);
+    margin: 10px 0;
+}
+
+.card-description {
+    font-size: 12px;
+    color: var(--secondary-color);
+}
+
+/* Grid */
+.grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+    margin-bottom: 30px;
+}
+
+/* Charts */
+.chart-container {
+    position: relative;
+    height: 300px;
+    margin-top: 20px;
+}
+
+/* Buttons */
+.btn {
+    padding: 10px 16px;
+    border: none;
+    border-radius: 6px;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.btn-primary {
+    background-color: var(--primary-fill);
+    color: var(--on-fill);
+}
+
+.btn-primary:hover {
+    background-color: var(--primary-fill-hover);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(12, 33, 26, 0.25);
+}
+
+.btn-secondary {
+    background-color: var(--neutral-fill);
+    color: var(--on-fill);
+}
+
+.btn-danger {
+    background-color: var(--danger-fill);
+    color: var(--on-fill);
+}
+
+.btn-logout {
+    background-color: var(--danger-fill);
+    color: var(--on-fill);
+    border: none;
+    padding: 8px 12px;
+}
+
+.btn-logout:hover {
+    filter: brightness(0.88);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .sidebar {
+        width: 280px;
+        transform: translateX(-100%);
+        transition: transform 0.3s ease-in-out;
+        z-index: 1000;
+        left: 0;
+        background: var(--sidebar-bg-light);
+        border-right: 1px solid var(--border-color);
+        box-shadow: 2px 0 10px rgba(12, 33, 26, 0.1);
+    }
+    
+    body.dark-mode .sidebar {
+        background: var(--sidebar-bg-dark);
+        border-right-color: var(--dark-border-color);
+        box-shadow: 2px 0 10px rgba(12, 33, 26, 0.5);
+    }
+
+    .sidebar.active {
+        width: 280px;
+        transform: translateX(0);
+    }
+
+    .main-content {
+        margin-left: 0;
+        width: 100%;
+    }
+
+    .login-container {
+        padding: 40px 25px;
+    }
+
+    .grid {
+        grid-template-columns: 1fr;
+    }
+    
+    /* Overlay when sidebar is open */
+    .sidebar-overlay {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: rgba(12, 33, 26, 0.5);
+        z-index: 999;
+    }
+    
+    .sidebar-overlay.active {
+        display: block;
+    }
+    
+    /* Show Hamburger Menu */
+    .navbar-top .hamburger-menu {
+        display: block;
+        font-size: 20px;
+        color: var(--light-text);
+        background: none;
+        border: none;
+        cursor: pointer;
+        margin-right: 15px;
+    }
+    
+    body.dark-mode .navbar-top .hamburger-menu {
+        color: var(--dark-text);
+    }
+}
+
+@media (min-width: 769px) {
+    .navbar-top .hamburger-menu {
+        display: none;
+    }
+    .sidebar-overlay {
+        display: none !important;
+    }
+}
+
+/* Vertical Scrollbar for Navigation Menu */
+.scrollable-nav {
+    overflow-y: auto;
+    max-height: calc(100vh - 200px); /* Adjust based on header/footer height */
+    padding-bottom: 20px;
+}
+
+/* Custom Scrollbar Styling */
+.scrollable-nav::-webkit-scrollbar {
+    width: 6px;
+}
+.scrollable-nav::-webkit-scrollbar-track {
+    background: transparent;
+}
+.scrollable-nav::-webkit-scrollbar-thumb {
+    background: rgba(12, 33, 26, 0.2);
+    border-radius: 3px;
+}
+.scrollable-nav:hover::-webkit-scrollbar-thumb {
+    background: rgba(12, 33, 26, 0.4);
+}
+
+/* ---------- OSU brand layer ---------- */
+
+/* Typography: Erstoria / Young Serif for headlines, Work Sans for everything else */
+h1, h2, h3,
+.login-title, .login-heading, .navbar-title, .card-title, .dash-title {
+    font-family: var(--font-heading);
+    font-weight: 400;
+    font-synthesis: none;
+    letter-spacing: 0.01em;
+}
+
+button, input, select, textarea {
+    font-family: inherit;
+}
+
+a {
+    color: var(--primary-color);
+}
+
+input, select, textarea {
+    accent-color: var(--osu-evergreen);
+}
+
+::selection {
+    background: var(--osu-olive);
+    color: var(--osu-ink);
+}
+
+/* Logo */
+.login-logo {
+    width: 280px;
+    max-width: 100%;
+    height: auto;
+    border-radius: 0;
+    margin: 0 auto 30px;
+}
+
+.login-logo img {
+    display: block;
+    width: 100%;
+    height: auto;
+}
+
+/* ---------- Sidebar: Deep Evergreen rail with grouped navigation ---------- */
+.sidebar,
+body.dark-mode .sidebar {
+    background: var(--osu-evergreen);
+    color: rgba(247, 243, 233, 0.82);
+    border-right: 0;
+}
+
+body.dark-mode .sidebar {
+    border-right: 1px solid rgba(247, 243, 233, 0.1);
+}
+
+.sidebar-top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    padding: 18px 16px 18px 20px;
+    min-height: 76px;
+    flex-shrink: 0;
+    border-bottom: 1px solid rgba(247, 243, 233, 0.1);
+    /* soft rays behind the logo, drawn in Rich Forest */
+    background: repeating-conic-gradient(from 262deg at 50% 100%, var(--osu-forest) 0deg 6deg, transparent 6deg 12deg);
+}
+
+.sidebar .sidebar-brand {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding: 0;
+    min-width: 0;
+    border: 0;
+    text-decoration: none;
+}
+
+.sidebar-brand .logo-full { height: 40px; width: auto; display: block; }
+.sidebar-brand .logo-mark { display: none; width: 38px; height: 38px; }
+
+.side-collapse {
+    flex: 0 0 auto;
+    width: 36px;
+    height: 36px;
+    border: 0;
+    border-radius: 10px;
+    cursor: pointer;
+    background: rgba(247, 243, 233, 0.1);
+    color: var(--osu-ivory);
+    display: grid;
+    place-items: center;
+    transition: background 0.15s;
+}
+
+.side-collapse:hover { background: rgba(247, 243, 233, 0.18); }
+
+.side-user {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 16px 20px;
+    flex-shrink: 0;
+    border-bottom: 1px solid rgba(247, 243, 233, 0.1);
+    text-decoration: none;
+}
+
+.side-user .avatar {
+    width: 42px;
+    height: 42px;
+    flex: 0 0 auto;
+    border-radius: 50%;
+    display: grid;
+    place-items: center;
+    background: var(--osu-ivory);
+    color: var(--osu-evergreen);
+    box-shadow: 0 0 0 2px var(--osu-olive);
+    font-size: 13.5px;
+    font-weight: 600;
+}
+
+.side-user div { min-width: 0; }
+.side-user strong { display: block; color: var(--osu-ivory); font-size: 14.5px; font-weight: 600; line-height: 1.2; }
+.side-user small { display: block; color: var(--osu-muted-olive); font-size: 12px; margin-top: 2px; }
+.side-user:hover strong { text-decoration: underline; text-underline-offset: 3px; }
+
+.sidebar nav {
+    flex: 1;
+    overflow-y: auto;
+    overflow-x: hidden;
+    padding: 14px 12px 20px;
+    scrollbar-width: thin;
+    scrollbar-color: rgba(247, 243, 233, 0.2) transparent;
+}
+
+.side-group { margin-bottom: 6px; border-radius: 12px; }
+.side-group[open] { background: rgba(247, 243, 233, 0.05); }
+
+.side-group > summary {
+    list-style: none;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 8px 10px;
+    border-radius: 12px;
+    cursor: pointer;
+    color: var(--osu-muted-olive);
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    user-select: none;
+}
+
+.side-group > summary::-webkit-details-marker { display: none; }
+.side-group > summary:hover { background: rgba(247, 243, 233, 0.06); }
+.side-group[open] > summary { color: var(--osu-ivory); }
+
+.side-group .tile {
+    width: 38px;
+    height: 38px;
+    flex: 0 0 auto;
+    border-radius: 10px;
+    display: grid;
+    place-items: center;
+    background: rgba(247, 243, 233, 0.08);
+    color: var(--osu-sage);
+    font-size: 15px;
+    letter-spacing: 0;
+}
+
+.side-group[open] .tile { background: rgba(247, 243, 233, 0.12); color: var(--osu-ivory); }
+.side-group .glabel { flex: 1; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+
+/* plus / minus box */
+.side-group .plus {
+    width: 24px;
+    height: 24px;
+    flex: 0 0 auto;
+    border-radius: 6px;
+    border: 1.5px solid rgba(247, 243, 233, 0.55);
+    position: relative;
+}
+
+.side-group .plus::before,
+.side-group .plus::after {
+    content: "";
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    width: 10px;
+    height: 1.5px;
+    background: var(--osu-ivory);
+    transform: translate(-50%, -50%);
+}
+
+.side-group .plus::after { transform: translate(-50%, -50%) rotate(90deg); transition: transform 0.15s; }
+.side-group[open] .plus::after { transform: translate(-50%, -50%) rotate(0deg); }
+
+.side-links { padding: 2px 6px 8px 14px; }
+
+.side-link {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 9px 12px;
+    margin-bottom: 2px;
+    border-radius: 10px;
+    color: rgba(247, 243, 233, 0.85);
+    text-decoration: none;
+    font-size: 14.5px;
+    white-space: nowrap;
+}
+
+.side-link i { width: 18px; flex: 0 0 auto; text-align: center; color: var(--osu-sage); font-size: 14.5px; }
+.side-link span { overflow: hidden; text-overflow: ellipsis; }
+.side-link:hover { background: rgba(247, 243, 233, 0.07); color: var(--osu-ivory); }
+
+/* Golden Olive marks the current page */
+.side-link.active {
+    background: var(--osu-forest);
+    color: var(--osu-ivory);
+    font-weight: 600;
+    box-shadow: inset 3px 0 0 var(--osu-olive);
+}
+
+.side-link.active i { color: var(--osu-muted-olive); }
+
+.side-foot {
+    padding: 10px 12px 16px;
+    flex-shrink: 0;
+    border-top: 1px solid rgba(247, 243, 233, 0.1);
+}
+
+.side-foot .side-link { font-size: 14px; }
+
+/* Collapsed rail (desktop) */
+@media (min-width: 769px) {
+    .sidebar.collapsed .sidebar-top { flex-direction: column; padding: 16px 0; gap: 12px; }
+    .sidebar.collapsed .sidebar-brand { padding: 0; }
+    .sidebar.collapsed .sidebar-brand .logo-full,
+    .sidebar.collapsed .side-user div,
+    .sidebar.collapsed .side-group .glabel,
+    .sidebar.collapsed .side-group .plus,
+    .sidebar.collapsed .side-link span { display: none; }
+    .sidebar.collapsed .sidebar-brand .logo-mark { display: block; }
+    .sidebar.collapsed .side-collapse i { transform: rotate(180deg); }
+    .sidebar.collapsed .side-user { justify-content: center; padding: 14px 0; }
+    .sidebar.collapsed .side-group > summary { justify-content: center; padding: 6px 0; }
+    .sidebar.collapsed .side-group[open] { background: none; }
+    .sidebar.collapsed .side-links { padding: 2px 0 8px; }
+    .sidebar.collapsed .side-link { justify-content: center; padding: 10px 0; }
+    .sidebar.collapsed .side-link i { width: auto; font-size: 16px; }
+    .sidebar.collapsed .side-link.active { box-shadow: inset 0 -3px 0 var(--osu-olive); }
+    .sidebar.collapsed .side-foot { padding: 10px 8px 16px; }
+}
+
+/* Buttons keep readable labels on brand fills */
+.btn-primary:hover {
+    background-color: var(--primary-fill-hover);
+}
+
+.btn-warning {
+    background-color: var(--warning-fill);
+    color: var(--osu-ink);
+}
+
+.btn-success {
+    background-color: var(--success-fill);
+    color: var(--on-fill);
+}
+
+/* Flash messages (replaces the old green / red inline cards) */
+.card.flash {
+    border-left: 4px solid var(--osu-olive);
+}
+
+.card.flash-success {
+    background: var(--success-bg);
+    color: var(--success-on);
+}
+
+.card.flash-warning {
+    background: var(--warning-bg);
+    color: var(--warning-on);
+}
+
+.card.flash-error {
+    background: var(--danger-bg);
+    color: var(--danger-on);
+}
+
+/* Status pills */
+.status-pill {
+    display: inline-block;
+    padding: 3px 8px;
+    border-radius: 12px;
+    font-size: 12px;
+}
+
+.status-success { background: var(--success-bg); color: var(--success-on); }
+.status-danger  { background: var(--danger-bg);  color: var(--danger-on); }
+.status-warning { background: var(--warning-bg); color: var(--warning-on); }
+.status-neutral { background: var(--neutral-bg); color: var(--neutral-on); }
+
+/* Scrollbar on dark surfaces */
+body.dark-mode .scrollable-nav::-webkit-scrollbar-thumb {
+    background: rgba(247, 243, 233, 0.25);
+}
+
+/* ================================================================
+   Benchmark layout: white work area, Evergreen rule under the top bar,
+   serif page titles, bordered cards, pill buttons and language switch.
+   ================================================================ */
+
+/* ---------- Top bar ---------- */
+.navbar-top {
+    padding: 12px 36px;
+    min-height: 76px;
+    border-bottom: 2px solid var(--osu-evergreen);
+}
+
+body.dark-mode .navbar-top { border-bottom-color: var(--osu-muted-olive); }
+
+.navbar-title {
+    font-size: 20px;
+    color: var(--primary-color);
+}
+
+body.dark-mode .navbar-title { color: var(--osu-ivory); }
+.navbar-title i { display: none; }
+.navbar-actions { gap: 16px; }
+
+/* Language switch: one pill, ORM | ENG | AMH */
+.lang-switch,
+.navbar-actions div:has(> .lang-btn) {
+    display: inline-flex !important;
+    align-items: center;
+    margin: 0 !important;
+    padding: 3px;
+    border: 1px solid var(--border-color);
+    border-radius: 999px;
+}
+
+.lang-btn,
+body.dark-mode .lang-btn {
+    order: 2;
+    margin: 0;
+    padding: 5px 11px;
+    border: 0;
+    border-radius: 999px;
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    line-height: 1.2;
+    color: var(--secondary-color);
+}
+
+.lang-btn[href*="lang=or"] { order: 1; }
+.lang-btn[href*="lang=am"] { order: 3; }
+.lang-btn.active { font-weight: 600; color: var(--on-fill); }
+
+.theme-toggle {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    font-size: 17px;
+}
+
+.theme-toggle:hover { background: var(--hover-bg-light); }
+
+/* Signed-in user chip */
+.top-user {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding-left: 16px;
+    border-left: 1px solid var(--border-color);
+    text-decoration: none;
+    color: var(--text-color);
+}
+
+.top-user .avatar {
+    width: 42px;
+    height: 42px;
+    flex: 0 0 auto;
+    border-radius: 50%;
+    display: grid;
+    place-items: center;
+    background: var(--neutral-bg);
+    color: var(--text-color);
+    font-size: 13.5px;
+    font-weight: 600;
+}
+
+.top-user strong { display: block; font-size: 15px; font-weight: 600; line-height: 1.2; white-space: nowrap; }
+.top-user small { display: block; font-size: 12.5px; color: var(--secondary-color); margin-top: 2px; white-space: nowrap; }
+.top-user:hover strong { text-decoration: underline; text-underline-offset: 3px; }
+
+/* ---------- Page header ---------- */
+.page-content { padding: 32px 40px 64px; }
+
+.page-head { margin-bottom: 28px; }
+
+.page-eyebrow {
+    margin: 0 0 8px;
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--secondary-color);
+}
+
+.page-heading {
+    margin: 0;
+    font-size: clamp(30px, 3.4vw, 44px);
+    line-height: 1.1;
+    color: var(--text-color);
+}
+
+.page-sub { margin: 10px 0 0; font-size: 16px; color: var(--secondary-color); }
+
+.dash-title {
+    font-size: 20px;
+    margin-bottom: 16px;
+    padding-bottom: 10px;
+    color: var(--text-color);
+    border-bottom: 1px solid var(--border-color);
+}
+
+.dash-title i { color: var(--secondary-color); font-size: 16px; margin-right: 6px; }
+
+/* ---------- Cards ---------- */
+.card {
+    border-radius: 14px;
+    padding: 24px;
+}
+
+.card:hover { box-shadow: 0 8px 24px -16px rgba(12, 33, 26, 0.35); }
+
+.card-header {
+    font-size: 12.5px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+}
+
+.card-stat { font-family: var(--font-heading); font-weight: 400; font-size: 38px; color: var(--text-color); }
+
+/* Stat cards: compact row - icon tile on the left, small label over a Work Sans number */
+.stat-card {
+    background: var(--card-bg);
+    border: 1px solid var(--border-color);
+    border-left: 3px solid var(--osu-evergreen);
+    border-radius: 10px;
+    padding: 12px 14px;
+    box-shadow: none;
+}
+
+body.dark-mode .stat-card { border-left-color: var(--osu-muted-olive); }
+
+.stat-card:has(> .stat-icon) {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 12px;
+}
+
+.stat-icon {
+    width: 36px;
+    height: 36px;
+    flex: 0 0 auto;
+    border-radius: 9px;
+    display: grid;
+    place-items: center;
+    background: var(--primary-tint);
+    color: var(--primary-color);
+    font-size: 15px;
+}
+
+.stat-info { display: flex; flex-direction: column-reverse; gap: 2px; min-width: 0; }
+
+.stat-info p {
+    margin: 0;
+    font-size: 11.5px;
+    font-weight: 500;
+    letter-spacing: 0.06em;
+    line-height: 1.3;
+    text-transform: uppercase;
+    color: var(--secondary-color);
+}
+
+.stat-info h3 {
+    margin: 0;
+    font-family: var(--font-body);
+    font-size: 22px;
+    font-weight: 600;
+    line-height: 1.15;
+    letter-spacing: 0;
+    font-variant-numeric: tabular-nums;
+    color: var(--text-color);
+}
+
+/* Tighter grid when it holds stat cards */
+.grid:has(> .stat-card) {
+    grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
+    gap: 12px;
+    margin-bottom: 22px;
+}
+
+/* ---------- Buttons ---------- */
+.btn,
+.login-button {
+    border-radius: 999px;
+    font-weight: 600;
+    text-decoration: none;
+}
+
+.btn { padding: 10px 20px; }
+.btn.btn-sm { padding: 6px 12px; font-size: 13px; }
+.btn-primary:hover, .login-button:hover { transform: none; box-shadow: none; }
+
+/* ---------- Tables ---------- */
+.page-content table { border-collapse: collapse; }
+
+.page-content table th {
+    font-size: 12.5px;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--text-color);
+    background: var(--table-head-bg);
+}
+
+/* ---------- Forms ---------- */
+.page-content input[type="text"],
+.page-content input[type="password"],
+.page-content input[type="number"],
+.page-content input[type="date"],
+.page-content input[type="search"],
+.page-content input[type="email"],
+.page-content select,
+.page-content textarea {
+    border-radius: 10px;
+}
+
+.page-content input:focus,
+.page-content select:focus,
+.page-content textarea:focus {
+    outline: none;
+    border-color: var(--osu-evergreen);
+    box-shadow: 0 0 0 1px var(--osu-evergreen);
+}
+
+@media (max-width: 768px) {
+    .top-user-text { display: none; }
+    .top-user { padding-left: 10px; }
+    .page-content { padding: 20px 16px 40px; }
+}
+
+/* ================================================================
+   Sign-in: Evergreen brand panel + Ivory form panel
+   ================================================================ */
+body.login-page { margin: 0; background: var(--osu-parchment); color: var(--osu-ink); }
+
+.lg {
+    min-height: 100vh;
+    display: flex;
+    align-items: stretch;
+    justify-content: center;
+    padding: 40px;
+}
+
+.lg-card {
+    width: 100%;
+    max-width: 1500px;
+    display: grid;
+    grid-template-columns: 1.45fr 1fr;
+    border-radius: 4px;
+    overflow: hidden;
+    box-shadow: 0 30px 70px -40px rgba(12, 33, 26, 0.55);
+}
+
+.lg-brand {
+    position: relative;
+    overflow: hidden;
+    background: var(--osu-evergreen);
+    padding: 72px 76px 70px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 48px;
+    color: #FFFFFF;
+    min-height: 640px;
+}
+
+.lg-brand::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: url('../img/osu-rays-wide.svg') right bottom / cover no-repeat;
+    pointer-events: none;
+}
+
+.lg-brand > * { position: relative; }
+.lg-logo { width: 300px; max-width: 100%; height: auto; display: block; }
+
+.lg-eyebrow {
+    margin: 0 0 18px;
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--osu-muted-olive);
+}
+
+.lg-headline {
+    margin: 0;
+    max-width: 12em;
+    font-family: var(--font-heading);
+    font-weight: 400;
+    font-size: clamp(32px, 3.6vw, 52px);
+    line-height: 1.08;
+    color: var(--osu-ivory);
+}
+
+.lg-commit {
+    margin: 22px 0 0;
+    max-width: 28em;
+    padding-left: 16px;
+    border-left: 3px solid var(--osu-muted-olive);
+    font-size: 17px;
+    line-height: 1.55;
+    color: rgba(247, 243, 233, 0.9);
+}
+
+.lg-form {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    background: var(--osu-ivory);
+    padding: 72px 76px 48px;
+}
+
+.lg-lang { position: absolute; top: 22px; right: 26px; }
+
+.lg-form h1 {
+    margin: 0 0 10px;
+    font-size: 50px;
+    line-height: 1.1;
+    color: var(--osu-evergreen);
+}
+
+.lg-sub { margin: 0 0 30px; font-size: 15px; color: var(--osu-highland); }
+.lg-field { margin-bottom: 18px; }
+.lg-label { display: block; margin-bottom: 9px; font-size: 15px; font-weight: 600; color: var(--osu-ink); }
+.lg-input-wrap { position: relative; }
+
+.lg-input {
+    width: 100%;
+    height: 62px;
+    padding: 0 18px;
+    font-size: 16px;
+    font-weight: 500;
+    color: var(--osu-ink);
+    background: #FFFFFF;
+    border: 1.5px solid rgba(20, 65, 48, 0.2);
+    border-radius: 10px;
+}
+
+.lg-input:focus { outline: none; border-color: var(--osu-evergreen); box-shadow: 0 0 0 1px var(--osu-evergreen); }
+.lg-input.has-toggle { padding-right: 64px; }
+
+.lg-show {
+    position: absolute;
+    right: 8px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 44px;
+    height: 44px;
+    border: 0;
+    border-radius: 8px;
+    background: none;
+    cursor: pointer;
+    font-size: 16px;
+    color: var(--osu-evergreen);
+}
+
+.lg-show:hover { background: rgba(20, 65, 48, 0.08); }
+
+.lg-btn {
+    width: 100%;
+    height: 62px;
+    margin-top: 8px;
+    border: 0;
+    border-radius: 999px;
+    background: var(--osu-evergreen);
+    color: #FFFFFF;
+    font-size: 17px;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.lg-btn:hover { background: var(--osu-forest); }
+
+.lg-alert {
+    display: flex;
+    gap: 10px;
+    align-items: flex-start;
+    margin-bottom: 20px;
+    padding: 13px 15px;
+    border-radius: 10px;
+    font-size: 14px;
+    background: var(--osu-clay);
+    color: var(--osu-ivory);
+}
+
+.lg-foot { margin-top: auto; padding-top: 40px; font-size: 13px; color: var(--osu-highland); }
+
+@media (max-width: 980px) {
+    .lg { padding: 0; }
+    .lg-card { grid-template-columns: 1fr; border-radius: 0; box-shadow: none; }
+    .lg-brand { min-height: 0; padding: 32px 26px 36px; }
+    .lg-logo { width: 220px; }
+    .lg-headline { font-size: 30px; }
+    .lg-commit { font-size: 14.5px; margin-top: 14px; }
+    .lg-form { padding: 34px 26px 32px; }
+    .lg-form h1 { font-size: 40px; }
+    .lg-lang { position: static; align-self: flex-end; margin-bottom: 16px; }
+}

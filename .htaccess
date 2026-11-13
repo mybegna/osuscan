@@ -1,0 +1,60 @@
+# OSU Scan System — Apache Configuration
+# Server: 10.10.9.19
+# Deployed to document root (/)
+
+Options -Indexes
+Options -MultiViews
+
+RewriteEngine On
+RewriteBase /
+
+# ── 1. Redirect /index.php to root ──────────────────────────
+RewriteCond %{THE_REQUEST} ^[A-Z]{3,}\s(.*)/index\.php [NC]
+RewriteRule ^ %1/ [R=301,L]
+
+# ── 2. Block direct access to ALL .php files except index.php ─
+RewriteCond %{REQUEST_URI} !/index\.php$
+RewriteRule \.php$ - [F,L]
+
+# ── 3. Route all non-file/non-dir requests to front controller ─
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^(.*)$ index.php?route=$1 [QSA,L]
+
+# ── 4. Protect sensitive files ───────────────────────────────
+<FilesMatch "\.(sql|log|env|bak|backup|sh|py|sqlite|md)$">
+    Require all denied
+</FilesMatch>
+
+# Block hidden files (.git, etc.)
+<FilesMatch "^\.">
+    Require all denied
+</FilesMatch>
+
+# ── 5. Security Headers ──────────────────────────────────────
+<IfModule mod_headers.c>
+    Header always set X-Content-Type-Options "nosniff"
+    Header always set X-Frame-Options "SAMEORIGIN"
+    Header always set X-XSS-Protection "1; mode=block"
+    Header always set Referrer-Policy "strict-origin-when-cross-origin"
+</IfModule>
+
+# ── 6. PHP Settings (override if allowed by server) ─────────
+<IfModule mod_php.c>
+    php_value upload_max_filesize 10M
+    php_value post_max_size 12M
+    php_value max_execution_time 60
+    php_value memory_limit 256M
+    php_flag display_errors Off
+    php_flag log_errors On
+</IfModule>
+
+# ── 7. Cache static assets ───────────────────────────────────
+<IfModule mod_expires.c>
+    ExpiresActive On
+    ExpiresByType image/jpeg "access plus 30 days"
+    ExpiresByType image/png  "access plus 30 days"
+    ExpiresByType image/gif  "access plus 30 days"
+    ExpiresByType text/css   "access plus 7 days"
+    ExpiresByType application/javascript "access plus 7 days"
+</IfModule>
